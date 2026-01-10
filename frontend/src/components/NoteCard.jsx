@@ -4,16 +4,16 @@ import { formatDate } from "../lib/utils";
 import api from "../lib/axios";
 import toast from "react-hot-toast";
 
-export const NoteCard = ({ note }) => {
+export const NoteCard = ({ note, setNotes }) => {
 
     const handleDelete = async (e, id) => {
-        e.preventDefault(); 
+        e.preventDefault();
 
         if (!window.confirm("Are you sure you want to delete this note?")) return;
 
         try {
             await api.delete(`/notes/${id}`);
-            setNotes((prev) => prev.filter((note) => note._id !== id)); 
+            setNotes((prev) => prev.filter((note) => note._id !== id));
             toast.success("Note deleted successfully");
         } catch (error) {
             console.log("Error in handleDelete", error);
